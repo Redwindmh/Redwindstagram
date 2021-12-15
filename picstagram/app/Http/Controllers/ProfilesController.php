@@ -13,4 +13,8 @@ class ProfilesController extends Controller
 
         return view('profiles.index', ['user' => $user]);
     }
+
+    public function edit(\App\Models\User $user) {
+        return view('profiles.edit', compact('user'));   
+    }
 }
