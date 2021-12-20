@@ -23,8 +23,8 @@ Auth::routes();
 // Route::get('/post', 'PostController@create');
 
 Route::get('/post/create', [App\Http\Controllers\PostController::class, 'create']);
-Route::get('/post/{post}', [App\Http\Controllers\PostController::class, 'show']);
 Route::post('/post', [App\Http\Controllers\PostController::class, 'store']);
+Route::get('/post/{post}', [App\Http\Controllers\PostController::class, 'show']);
 
 Route::get('/profile/{user}', [App\Http\Controllers\ProfilesController::class, 'index'])->name('profile.show');
 Route::get('/profile/{user}/edit', [App\Http\Controllers\ProfilesController::class, 'edit'])->name('profile.edit');

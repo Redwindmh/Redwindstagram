@@ -9,6 +9,13 @@ class Profile extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
+    public function profileImage() {
+        $imagePath = ($this->image) ? $this->image : 'uploads/71raFncD7390HsA2O7utlOGy5EZ85tsVomqoA6Vx.jpg';
+        return '/storage/' . $imagePath;
+    }
+
     public function user() {
         return $this->belongsTo(\App\Models\User::class);
     }
