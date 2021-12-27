@@ -59,6 +59,20 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="/profile/{{ Auth::user()->username }}">
+                                        {{ __('Profile') }}
+                                    </a>
+
+                                    <form id="profile" action="profile" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                    <a class="dropdown-item" href="/about">
+                                        {{ __('About') }}
+                                    </a>
+
+                                    <form id="about" action="about" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

@@ -19,7 +19,7 @@ class PostController extends Controller
 
         return view('posts.index', compact('posts'));
     }
-    
+
     public function create() {
         return view('posts.create');
     }
@@ -28,7 +28,7 @@ class PostController extends Controller
        $data = request()->validate([
            'caption' => 'required',
            'image' => ['required', 'image'],
-       ]); 
+       ]);
 
        $imagePath = request('image')->store('uploads', 'public');
 
@@ -40,7 +40,7 @@ class PostController extends Controller
            'image' => $imagePath,
        ]);
 
-       return redirect('/profile/' . auth()->user()->id);
+       return redirect('/profile/' . auth()->user()->username);
     }
 
     public function show(\App\Models\Post $post) {

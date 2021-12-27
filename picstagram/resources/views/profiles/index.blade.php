@@ -26,7 +26,7 @@
             <div><a href="{{$user->profile->url}}" class="text-decoration-none text-white" target="_blank"><strong>{{ $user->profile->url ?? 'Your URL goes here!'}}</strong></a></div>
             <div class="mt-3">
                 @can('update', $user->profile)
-                <a href="/profile/{{$user->id}}/edit" class="text-small text-decoration-none text-dark">(edit profile)</a>
+                <a href="/profile/{{$user->username}}/edit" class="text-small text-decoration-none text-dark">(edit profile)</a>
                 @endcan
             </div>
         </div>

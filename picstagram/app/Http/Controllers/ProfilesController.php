@@ -16,21 +16,21 @@ class ProfilesController extends Controller
             return $user->posts->count();
         });
 
-        $followersCount = Cache::remember('count.followers.' . $user->id, now()->addSeconds(30), function() use ($user) {
+        $followersCount = Cache::remember('count.followers.' . $user->id, now()->addSeconds(10), function() use ($user) {
             return $user->profile->followers->count();
         });
 
-        $followingCount = Cache::remember('count.following.' . $user->id, now()->addSeconds(30), function() use ($user) {
+        $followingCount = Cache::remember('count.following.' . $user->id, now()->addSeconds(10), function() use ($user) {
             return $user->following->count();
         });
-        
+
         return view('profiles.index', compact('user', 'follows', 'postCount', 'followersCount', 'followingCount'));
     }
 
     public function edit(\App\Models\User $user) {
         $this->authorize('update', $user->profile);
 
-        return view('profiles.edit', compact('user'));   
+        return view('profiles.edit', compact('user'));
     }
 
     public function update(\App\Models\User $user) {
@@ -59,6 +59,6 @@ class ProfilesController extends Controller
             $imageArray ?? [],
         ));
 
-        return redirect("/profile/{$user->id}");
+        return redirect("/profile/{$user->username}");
     }
 }
