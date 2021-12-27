@@ -7,18 +7,19 @@
             <img src="{{ $user->profile->profileImage() }}" alt="user-profile-pic" class="img-fluid rounded-circle">
         </div>
         <div class="col-9 p-5">
-            <div class="d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center">
                 <h1>{{ $user->username }}</h1>
-                <div>
+                <follow-button user-id="{{ $user->id }}" follows="{{ $follows }}"></follow-button>
+                <div class="w-100 text-end">
                     @can('update', $user->profile)
                     <a href="/post/create"><button class="btn btn-dark btn-sm text-white fw-bold pt-1 pb-1 ms-3 mb-2 shadow-lg">+ Add new post</button></a>
                     @endcan
                 </div>
             </div>
             <div class="d-flex">
-                <div class="pe-4"><strong>{{$user->posts->count()}}</strong> post(s)</div>
-                <div class="pe-4"><strong>666</strong> follower(s)</div>
-                <div><strong>0</strong> following</div>
+                <div class="pe-4"><strong>{{ $postCount }}</strong> post(s)</div>
+                <div class="pe-4"><strong>{{ $followersCount }}</strong> follower(s)</div>
+                <div><strong>{{ $followingCount }}</strong> following</div>
             </div>
             <div class="pt-3"><strong>{{ $user->profile->title }}</strong></div>
             <div>{{ $user->profile->description }}</div>

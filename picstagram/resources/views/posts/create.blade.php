@@ -10,7 +10,7 @@
                 <div class="form-group row">
                     <label for="caption" class="col-md-4 col-form-label text-md-end">Post Caption</label>
                     <div class="col-md-6">
-                        <input id="caption" type="text" name="caption" class="text-white form-control @error('caption') is-invalid @enderror" value="{{ old('caption') }}"  autocomplete="caption" autofocus>
+                        <input id="caption" type="text" name="caption" class="text-dark form-control @error('caption') is-invalid @enderror" value="{{ old('caption') }}"  autocomplete="caption" autofocus>
                         @error('caption')
                                 <strong>{{ $errors->has('error') }}</strong>
                         @enderror

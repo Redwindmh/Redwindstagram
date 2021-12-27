@@ -2,26 +2,17 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-Route::get('/', function () {
-    return view('welcome');
-});
+use App\Mail\NewUserWelcomeMail;
 
 Auth::routes();
 
-// Route::get('/post', 'PostController@create');
+Route::get('/mail', function () {
+    return new NewUserWelcomeMail();    
+});
 
+Route::post('follow/{user}', [App\Http\Controllers\FollowsController::class, 'store']);
+
+Route::get('/', [App\Http\Controllers\PostController::class, 'index']);
 Route::get('/post/create', [App\Http\Controllers\PostController::class, 'create']);
 Route::post('/post', [App\Http\Controllers\PostController::class, 'store']);
 Route::get('/post/{post}', [App\Http\Controllers\PostController::class, 'show']);
