@@ -58,7 +58,7 @@
                                     {{ Auth::user()->username }}
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-dark" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="/profile/{{ Auth::user()->username }}">
                                         {{ __('Profile') }}
                                     </a>

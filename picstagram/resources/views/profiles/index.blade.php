@@ -3,10 +3,10 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-3 p-5">
+        <div class="col-md-3 p-md-5 p-3">
             <img src="{{ $user->profile->profileImage() }}" alt="user-profile-pic" class="img-fluid rounded-circle">
         </div>
-        <div class="col-9 p-5">
+        <div class="col-md-9 p-md-5 p-3">
             <div class="d-flex align-items-center">
                 <h1>{{ $user->username }}</h1>
                 <follow-button user-id="{{ $user->id }}" follows="{{ $follows }}"></follow-button>
