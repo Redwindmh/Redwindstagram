@@ -46,4 +46,11 @@ class PostController extends Controller
     public function show(\App\Models\Post $post) {
         return view('posts.show', compact('post'));
     }
+
+    public function deletePost(\App\Models\Post $post) {
+        $post = Post::find($post);
+        $post->destroy();
+
+        return redirect('/profile/' . auth()->user()->username)->with(compact('post'));
+    }
 }

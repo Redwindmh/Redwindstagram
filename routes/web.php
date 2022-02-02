@@ -16,6 +16,7 @@ Route::get('/', [App\Http\Controllers\PostController::class, 'index']);
 Route::get('/post/create', [App\Http\Controllers\PostController::class, 'create']);
 Route::post('/post', [App\Http\Controllers\PostController::class, 'store']);
 Route::get('/post/{post}', [App\Http\Controllers\PostController::class, 'show']);
+Route::delete('/post/{post}/delete', [App\Http\Controllers\PostController::class, 'destroy']);
 
 Route::get('/profile/{user:username}', [App\Http\Controllers\ProfilesController::class, 'index'])->name('profile.show');
 Route::get('/profile/{user:username}/edit', [App\Http\Controllers\ProfilesController::class, 'edit'])->name('profile.edit');
