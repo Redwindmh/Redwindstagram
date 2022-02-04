@@ -26,3 +26,7 @@ Route::patch('/profile/{user:id}', [App\Http\Controllers\ProfilesController::cla
 Route::get('/about', function() {
     return view('pages.about');
 });
+
+Route::get('/linkstorage', function() {
+    Artisan::call('storage:link');
+});
