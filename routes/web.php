@@ -28,5 +28,5 @@ Route::get('/about', function() {
 });
 
 Route::get('/linkstorage', function() {
-    Artisan::call('storage:link');
+    Artisan::call('storage:link', []);
 });
