@@ -28,8 +28,8 @@
                         <button class="btn btn-dark shadow">+ Create New Post</button>
                     </div>
                 </div>
-            </div>   
-        </div>   
-    </form>                  
+            </div>
+        </div>
+    </form>
 </div>
 @endsection
