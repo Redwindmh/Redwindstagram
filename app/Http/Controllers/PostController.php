@@ -36,7 +36,7 @@ class PostController extends Controller
 
         $imagePath = request('image')->store('uploads', 's3');
 
-        $image = Image::make(public_path("{$imagePath}"))->fit(1200, 1200);
+        $image = Image::make(public_path("/storage/{$imagePath}"))->fit(1200, 1200);
         $image->save();
 
         auth()->user()->posts()->create([
