@@ -36,7 +36,8 @@ class PostController extends Controller
 
         $imagePath = request('image')->store('uploads', 's3');
 
-        $image = Image::make(public_path("/storage/{$imagePath}"))->fit(1200, 1200);
+        // $image = Image::make(public_path("/storage/{$imagePath}"))->fit(1200, 1200);
+        $image = Image::make('https://redwindstagram.s3.ap-northeast-1.amazonaws.com/profile/bp03VD1FQNhzuWTJOconTFOFHBgDHgu2xQYkKJdx.png')->fit(1200, 1200);
         $image->save();
 
         auth()->user()->posts()->create([
