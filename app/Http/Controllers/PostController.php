@@ -60,7 +60,7 @@ class PostController extends Controller
         if (!Storage::disk('s3')->exists('posts')) {
             Storage::disk('s3')->makeDirectory('posts');
         }
-        Image::make($file)->resize(1200, 1200)->save('storage/uploads/' . $filename);
+        Image::make($file)->resize(1200, 1200)->save('/posts/' . $filename);
         $data['image'] = $filename;
         auth()->user()->posts()->create($data);
         return redirect('/profile/' . auth()->user()->id);
