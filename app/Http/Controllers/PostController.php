@@ -28,43 +28,43 @@ class PostController extends Controller
         return view('posts.create');
     }
 
-    // public function store()
-    // {
-    //     $data = request()->validate([
-    //         'caption' => 'required',
-    //         'image' => ['required', 'image'],
-    //     ]);
-
-    //     $imagePath = request('image')->store('uploads', 's3');
-
-    //     $image = Image::make(public_path("/storage/{$imagePath}"))->fit(1200, 1200);
-    //     $image->save();
-
-    //     auth()->user()->posts()->create([
-    //         'caption' => $data['caption'],
-    //         'image' => $imagePath,
-    //     ]);
-
-    //     return redirect('/profile/' . auth()->user()->username);
-    // }
-
-
-    public function store(Request $request)
+    public function store()
     {
-        $data = $request->validate([
-            'caption'   => 'required',
-            'image'     => 'required|image|mimes:jpeg,jpg,png,'
+        $data = request()->validate([
+            'caption' => 'required',
+            'image' => ['required', 'image'],
         ]);
-        $file = $request->file('image');
-        $filename = uniqid() . substr(time(), 0, 6) . "." . $file->getClientOriginalExtension();
-        if (!Storage::disk('s3')->exists('posts')) {
-            Storage::disk('s3')->makeDirectory('posts');
-        }
-        Image::make($file)->resize(1200, 1200)->save('/posts/' . $filename);
-        $data['image'] = $filename;
-        auth()->user()->posts()->create($data);
-        return redirect('/profile/' . auth()->user()->id);
+
+        $imagePath = request('image')->store('uploads', 's3');
+
+        $image = Image::make(public_path("/storage/{$imagePath}"))->fit(1200, 1200);
+        $image->save();
+
+        auth()->user()->posts()->create([
+            'caption' => $data['caption'],
+            'image' => $imagePath,
+        ]);
+
+        return redirect('/profile/' . auth()->user()->username);
     }
+
+
+    // public function store(Request $request)
+    // {
+    //     $data = $request->validate([
+    //         'caption'   => 'required',
+    //         'image'     => 'required|image|mimes:jpeg,jpg,png,'
+    //     ]);
+    //     $file = $request->file('image');
+    //     $filename = uniqid() . substr(time(), 0, 6) . "." . $file->getClientOriginalExtension();
+    //     if (!Storage::disk('s3')->exists('posts')) {
+    //         Storage::disk('s3')->makeDirectory('posts');
+    //     }
+    //     Image::make($file)->resize(1200, 1200)->save('storage/posts/' . $filename);
+    //     $data['image'] = $filename;
+    //     auth()->user()->posts()->create($data);
+    //     return redirect('/profile/' . auth()->user()->id);
+    // }
 
 
 
