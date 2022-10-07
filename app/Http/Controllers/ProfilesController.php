@@ -50,7 +50,8 @@ class ProfilesController extends Controller
         if (request('image')) {
             $imagePath = request('image')->store('profile', 's3');
 
-            $image = Image::make(public_path("/storage/{$imagePath}"));
+            // $image = Image::make(public_path("/storage/{$imagePath}"));
+            $image = Image::make(public_path("/{$imagePath}"));
             $image->save();
 
             $imageArray = ['image' => $imagePath];

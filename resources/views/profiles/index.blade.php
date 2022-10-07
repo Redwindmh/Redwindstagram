@@ -34,7 +34,6 @@
             @foreach($user->posts as $post)
             <div class="col-4 pb-3">
                 <a href="/post/{{ $post->id }}"><img src="/storage/{{ $post->image }}" alt="{{ $post->count()}}" class="img-fluid"></a>
-                <img src="https://redwindstagram.s3.ap-northeast-1.amazonaws.com/profile/AwJxluo3oCW3VytZZCGnq1Lr7BmK7hKUVG03epdn.jpg" alt="test">
             </div>
             @endforeach
         </div>
