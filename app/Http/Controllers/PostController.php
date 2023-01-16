@@ -38,8 +38,8 @@ class PostController extends Controller
         $imagePath = request('image')->store('posts', 's3');
 
         // $image = Image::make(public_path("/storage/{$imagePath}"))->fit(1200, 1200);
-        $image = Image::make(Storage::url($imagePath))->fit(1200, 1200);
-        $image->save();
+        $image = Image::make(url($imagePath))->fit(1200, 1200);
+        // $image->save();
 
         auth()->user()->posts()->create([
             'caption' => $data['caption'],

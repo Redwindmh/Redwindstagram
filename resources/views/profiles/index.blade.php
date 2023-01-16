@@ -33,7 +33,7 @@
         <div class="row pt-3">
             @foreach($user->posts as $post)
             <div class="col-4 pb-3">
-                <a href="/post/{{ $post->id }}"><img src="storage/{{ $post->image }}" alt="{{ $post->count()}}" class="img-fluid"></a>
+                <a href="/post/{{ $post->id }}"><img src="/storage/{{ $post->image }}" alt="{{ $post->count()}}" class="img-fluid"></a>
             </div>
             @endforeach
         </div>
