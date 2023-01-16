@@ -65,12 +65,12 @@ return [
 
         'pgsql' => [
             'driver' => 'pgsql',
-            'url' => 'postgres://cxnrncaguyeoxl:9bc32611b82944bc9bb452f207d7099788777f3308c6cdfb3a1f0dcb2ea53b79@ec2-44-194-92-192.compute-1.amazonaws.com:5432/ddk3vb7d6shk7r',
-            'host' => 'ec2-44-194-92-192.compute-1.amazonaws.com',
-            'port' => '5432',
-            'database' => 'd7c03a7bpd1ii7',
-            'username' => 'nxphlxvdcqhexx',
-            'password' => '9bc32611b82944bc9bb452f207d7099788777f3308c6cdfb3a1f0dcb2ea53b79',
+            'url' => env('DATABASE_URL'),
+            'host' => env('DB_HOST'),
+            'port' => env('DB_PORT'),
+            'database' => env('DB_DATABASE'),
+            'username' => env('DB_USERNAME'),
+            'password' => env('DB_PASSWORD'),
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
