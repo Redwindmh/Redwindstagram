@@ -39,6 +39,8 @@ class PostController extends Controller
 
         // $image = Image::make(public_path("/storage/{$imagePath}"))->fit(1200, 1200);
         $image = Image::make(url($imagePath))->fit(1200, 1200);
+        // $image = Image::make(Storage::url($imagePath))->fit(1200, 1200);
+
         // $image->save();
 
         auth()->user()->posts()->create([
