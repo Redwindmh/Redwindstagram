@@ -38,29 +38,10 @@ class PostController extends Controller
         $imagePath = request('image')->store('posts', 's3');
 
         // $image = Image::make(public_path("/storage/{$imagePath}"))->fit(1200, 1200);
-        // $image = Image::make(public_path($imagePath))->fit(1200, 1200);
+        $image = Image::make(public_path($imagePath))->fit(1200, 1200);
         // $image = Image::make(Storage::url($imagePath))->fit(1200, 1200);
 
-        // $image->save();
-
-        // Specify a local temporary file path
-        $localFilePath = storage_path('app/tmp/temp_image.jpg');
-
-        // Download the image from S3 to the local file
-        Storage::disk('s3')->get($imagePath, $localFilePath);
-
-        // Manipulate the image using Intervention Image
-        $image = Image::make($localFilePath)->fit(1200, 1200);
-
-        // Save the modified image back to S3
-        $image->save($localFilePath);
-
-        // Upload the modified image back to S3
-        Storage::disk('s3')->put($imagePath, file_get_contents($localFilePath));
-
-        // Delete the local temporary file
-        unlink($localFilePath);
-
+        $image->save();
 
         auth()->user()->posts()->create([
             'caption' => $data['caption'],
