@@ -28,7 +28,7 @@ class PostController extends Controller
         return view('posts.create');
     }
 
-    public function store(Request $request)
+    public function store()
     {
         $data = request()->validate([
             'caption' => 'required',
@@ -39,7 +39,7 @@ class PostController extends Controller
 
         // $image = Image::make(public_path($imagePath))->fit(1200, 1200);
         // $image = Image::make(storage_path($imagePath));
-        $image = Image::make(Storage::url($imagePath))->fit(1200, 1200);
+        $image = Image::make(url($imagePath))->fit(1200, 1200);
 
         $image->save();
 
