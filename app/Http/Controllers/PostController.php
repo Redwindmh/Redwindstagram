@@ -28,7 +28,7 @@ class PostController extends Controller
         return view('posts.create');
     }
 
-    public function store()
+    public function store(Request $request)
     {
         $data = request()->validate([
             'caption' => 'required',
@@ -37,8 +37,8 @@ class PostController extends Controller
 
         $imagePath = request('image')->store('posts', 's3');
 
-        // $image = Image::make(public_path("/storage/{$imagePath}"))->fit(1200, 1200);
-        $image = \Intervention\Image\ImageManagerStatic::make($imagePath);
+        $image = Image::make(public_path("/storage/{$imagePath}"))->fit(1200, 1200);
+        // $image = Image::make($imagePath);
         // $image = Image::make(Storage::url($imagePath))->fit(1200, 1200);
 
         $image->save();
