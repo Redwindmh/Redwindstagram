@@ -38,15 +38,22 @@ class PostController extends Controller
         $imagePath = request('image')->store('posts', 's3');
 
         // $image = Image::make(public_path("/storage/{$imagePath}"))->fit(1200, 1200);
-        $image = Image::make(public_path($imagePath))->fit(1200, 1200);
+        // $image = Image::make(public_path($imagePath))->fit(1200, 1200);
         // $image = Image::make(Storage::url($imagePath))->fit(1200, 1200);
 
         // $image->save();
+
+        $image = Image::make(public_path($imagePath));
+        $image->fit(1200, 1200);
+        $image->save(public_path($imagePath));
+
 
         auth()->user()->posts()->create([
             'caption' => $data['caption'],
             'image' => $imagePath,
         ]);
+
+        dd($imagePath);
 
         return redirect('/profile/' . auth()->user()->username);
     }
