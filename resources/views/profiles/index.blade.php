@@ -38,6 +38,7 @@
                 <a href="/post/{{ $post->id }}"><img src="https://redwindstagram.s3.ap-northeast-1.amazonaws.com/posts/Ikef8RLrKbLDm2hoRGWh4jn9unoAo6hM88XgwNzb.png" alt="{{ $post->count()}}" class="img-fluid"></a>
                 <img src="https://redwindstagram.s3.ap-northeast-1.amazonaws.com/posts/Ikef8RLrKbLDm2hoRGWh4jn9unoAo6hM88XgwNzb.png"/>
             </div>
+            <div><h2>FUCK!</h2></div>
             @endforeach
         </div>
     </div>
