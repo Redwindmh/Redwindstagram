@@ -35,7 +35,7 @@
             <div class="col-4 pb-3">
                 {{-- <a href="/post/{{ $post->id }}"><img src="/storage/{{ $post->image }}" alt="{{ $post->count()}}" class="img-fluid"></a> --}}
                 {{-- <a href="/post/{{ $post->id }}"><img src="{{ $post->image }}" alt="{{ $post->count()}}" class="img-fluid"></a> --}}
-                <a href="https://redwindstagram.s3.ap-northeast-1.amazonaws.com/posts/Ikef8RLrKbLDm2hoRGWh4jn9unoAo6hM88XgwNzb.png"><img src="{{ $post->image }}" alt="{{ $post->count()}}" class="img-fluid"></a>
+                <a href="/post/{{ $post->id }}"><img src="https://redwindstagram.s3.ap-northeast-1.amazonaws.com/posts/Ikef8RLrKbLDm2hoRGWh4jn9unoAo6hM88XgwNzb.png" alt="{{ $post->count()}}" class="img-fluid"></a>
             </div>
             @endforeach
         </div>
