@@ -38,8 +38,8 @@ class PostController extends Controller
         $imagePath = request('image')->store('posts', 's3');
 
         // $image = Image::make(public_path($imagePath))->fit(1200, 1200);
-        $image = Image::make(storage_path($imagePath));
-        // $image = Image::make(Storage::url($imagePath))->fit(1200, 1200);
+        // $image = Image::make(storage_path($imagePath));
+        $image = Image::make(Storage::url($imagePath))->fit(1200, 1200);
 
         $image->save();
 
