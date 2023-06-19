@@ -28,59 +28,47 @@ class PostController extends Controller
         return view('posts.create');
     }
 
-    // public function store()
-    // {
-    //     $data = request()->validate([
-    //         'caption' => 'required',
-    //         'image' => ['required', 'image'],
-    //     ]);
-
-    //     $imagePath = request('image')->store('posts', 's3');
-
-    //     // $image = Image::make(public_path("/storage/{$imagePath}"))->fit(1200, 1200);
-    //     // $image = Image::make(public_path($imagePath))->fit(1200, 1200);
-    //     // $image = Image::make(Storage::url($imagePath))->fit(1200, 1200);
-
-    //     // $image->save();
-
-    //     $image = Image::make(public_path($imagePath));
-    //     $image->fit(1200, 1200);
-    //     $image->save(public_path($imagePath));
-
-
-    //     auth()->user()->posts()->create([
-    //         'caption' => $data['caption'],
-    //         'image' => $imagePath,
-    //     ]);
-
-    //     dd($imagePath);
-
-    //     return redirect('/profile/' . auth()->user()->username);
-    // }
-
-    public function store(Request $request)
+    public function store()
     {
-        if ($request->hasFile('profile_image')) {
-            //get filename with extension
-            $filenamewithextension = $request->file('profile_image')->getClientOriginalName();
-            //get filename without extension
-            $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-            //get file extension
-            $extension = $request->file('profile_image')->getClientOriginalExtension();
-            //filename to store
-            $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
-            Storage::put('public/profile_images/' . $filenametostore, fopen($request->file('profile_image'), 'r+'));
-            Storage::put('public/profile_images/crop/' . $filenametostore, fopen($request->file('profile_image'), 'r+'));
-            //Crop image here
-            $cropimage = public_path('storage/profile_images/crop/' . $filenametostore);
-            $img = Image::make($cropimage)->crop($request->input('w'), $request->input('h'), $request->input('x1'), $request->input('y1'))->save($cropimage);
+        $data = request()->validate([
+            'caption' => 'required',
+            'image' => ['required', 'image'],
+        ]);
 
-            // you can save the below image path in database
-            $path = asset('storage/profile_images/crop/' . $filenametostore);
-            return redirect('image')->with(['success' => "Image cropped successfully.", 'path' => $path]);
-        }
+        $imagePath = request('image')->store('posts', 's3');
+
+        // $image = Image::make(public_path("/storage/{$imagePath}"))->fit(1200, 1200);
+        // $image = Image::make(public_path($imagePath))->fit(1200, 1200);
+        // $image = Image::make(Storage::url($imagePath))->fit(1200, 1200);
+
+        // $image->save();
+
+        // Specify a local temporary file path
+        $localFilePath = storage_path('app/tmp/temp_image.jpg');
+
+        // Download the image from S3 to the local file
+        Storage::disk('s3')->get($imagePath, $localFilePath);
+
+        // Manipulate the image using Intervention Image
+        $image = Image::make($localFilePath)->fit(1200, 1200);
+
+        // Save the modified image back to S3
+        $image->save($localFilePath);
+
+        // Upload the modified image back to S3
+        Storage::disk('s3')->put($imagePath, file_get_contents($localFilePath));
+
+        // Delete the local temporary file
+        unlink($localFilePath);
+
+
+        auth()->user()->posts()->create([
+            'caption' => $data['caption'],
+            'image' => $imagePath,
+        ]);
+
+        return redirect('/profile/' . auth()->user()->username);
     }
-
 
 
     // public function store(Request $request)
